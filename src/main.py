@@ -1,11 +1,13 @@
-from car import Car
+from animal import Animal, Dog, Cat, Bird
 
-mazda = Car('RX-8', 2001, 'red', False)
+bijonfonson = Dog("Bijonfonson")
+chinchi = Cat("Chinchi")
+songbird = Bird("Songbird")
 
-print(mazda)
-
-mazda.drive()
-mazda.stop()
-
-print(mazda.drive)
-print(mazda.stop)
+print(bijonfonson.name)
+print(bijonfonson.bark())
+print(chinchi.name)
+print(chinchi.lick())
+print(songbird.name)
+print(songbird.is_alive)
+print(songbird.fly())
