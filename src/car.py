@@ -1,4 +1,7 @@
 class Car:
+    
+
+    # This is the constructor method that initializes the attributes of the Car class
     def __init__(self, model, year, color, for_sale):
         self.model = model
         self.year = year

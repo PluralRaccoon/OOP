@@ -1,7 +1,5 @@
-# Objects in Python
+# class variables
 
-object = A "bundle" of related attributes (variables) and ethods (functions)
-         EX. phone, cup, book
-         YOu need a "class" to create many object
-
-class = (blueprint) used to design th structure and layout of an object
+Are variables sared among all instancces of a class.  
+Defined outside the constructor.  
+Allow you to share data among all objects created from that class.  
