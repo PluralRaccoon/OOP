@@ -1,7 +1,6 @@
-# Multiple Inheritance
-Inherits its attributes and behaviors from more than one parent class.
-C(A, B)
-
-# Multilevel Inheritance
-Inherits fom a parent which inherits from another parent.
-C(B) <- B(A) <- A
+# Abstract class
+A class that cannot be instantiated on its own; Meant to be suclassed.  
+Thet can contain abstract methods, which are declated but have no implementation.  
+Abstract classes benefits:
+- Prevents instantiation of the class itself
+- Requires children to use inherited abstract methods
