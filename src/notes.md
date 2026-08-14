@@ -1,5 +1,7 @@
-# Inheritance
+# Multiple Inheritance
+Inherits its attributes and behaviors from more than one parent class.
+C(A, B)
 
-Allow a class to inherit attributes and methods from another class.  
-Helps with code reusability and extensibility.  
-class Child(Parent)
+# Multilevel Inheritance
+Inherits fom a parent which inherits from another parent.
+C(B) <- B(A) <- A

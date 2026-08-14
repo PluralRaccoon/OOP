@@ -1,13 +1,16 @@
-from animal import Animal, Dog, Cat, Bird
+from animal import Fish, Rabbit, Hawk
 
-bijonfonson = Dog("Bijonfonson")
-chinchi = Cat("Chinchi")
-songbird = Bird("Songbird")
+rabbit = Rabbit("Bunny")
+hawk = Hawk("Eagle")
+fish = Fish("Nemo")
 
-print(bijonfonson.name)
-print(bijonfonson.bark())
-print(chinchi.name)
-print(chinchi.lick())
-print(songbird.name)
-print(songbird.is_alive)
-print(songbird.fly())
+rabbit.eat()
+rabbit.sleep()
+rabbit.run()
+hawk.eat()
+hawk.sleep()
+hawk.hunt()
+fish.eat()
+fish.sleep()
+fish.run()
+fish.hunt()

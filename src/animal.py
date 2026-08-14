@@ -9,14 +9,37 @@ class Animal:
     def sleep(self):
         print(f"{self.name} is sleeping good.")
 
-class Dog(Animal):
-    def bark(self):
-        print(f"{self.name} is barking.")
+class Prey(Animal):
+    def __init__(self, name):
+        super().__init__(name)
 
-class Cat(Animal):
-    def lick(self):
-        print(f"{self.name} is licking itself.")
+    def run(self):
+        print(f"{self.name} is running away from a predator.")
 
-class Bird(Animal):
-    def fly(self):
-        print(f"{self.name} is flying.")
+class Predator(Animal):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def hunt(self):
+        print(f"{self.name} is hunting for prey.")
+
+class Rabbit(Prey):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def eat(self):
+        print(f"{self.name} is eating some vegetables.")
+
+class Hawk(Predator):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def eat(self):
+        print(f"{self.name} is eating a rabbit.")
+
+class Fish(Prey, Predator):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def eat(self):
+        print(f"{self.name} is eating some algae.")
