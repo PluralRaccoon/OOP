@@ -1,14 +1,21 @@
-from animal import Dog, Cat
-from shapes import Circle, Square, Triangle, Pizza
+from logevent import IntrusionEvent, S3Client, MalwareDataPipeline
 
-animals = [Dog(), Cat()]
+def main():
+    sus = IntrusionEvent("This is a test log event.", "sensor_001")
+    # sus.process_event()
 
-for animal in animals:
-    animal.speak()
-    
-################################333
+    print("--- Composition ---\n")
+    print(f"The Sensor ID: {sus.metadata.sensor_id}")
+    print(f"The event happened on: {sus.metadata.timestampt}")
+    print(sus.raw_log)
 
-shapes = [Circle(5), Square(4), Triangle(6, 8), Pizza(7, ['cheese', 'pepperoni', 'mushrooms'])]
+    print("--- Aggregation ---\n")
+    # The client exists independently of the pipeline.
+    shared_s3_client = S3Client(bucket_name="sec-ops-cold-storage")
+    pipeline = MalwareDataPipeline(storage_client=shared_s3_client)
 
-for shape in shapes:
-    print(shape.area())
+    payload = { "name": "Charlie" }
+    pipeline.run_pipeline(payload)
+
+if __name__ == "__main__":
+    main()
