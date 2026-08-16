@@ -1,14 +1,20 @@
-from employee import Employee
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel
+
+class User(BaseModel):
+    id: int
+    name: str = 'John Doe'
+    signup_ts: Optional[datetime] = None
+    friends: list[int] = []
 
 def main():
-    bob = Employee("Bob Esponja", "Cook")
-    calamardo = Employee("Calamardo", "Cashier")
-
-    print(bob.get_info())
-    print(calamardo.get_info())
-
-    print(Employee.is_valid_position("Manager"))
-    print(Employee.is_valid_position("Data Engineer"))
+    external_data = {'id': '123', 'signup_ts': '2017-06-01 12:22', 'friends': [1, '2', b'3']} # type: ignore
+    user = User(**external_data) # type: ignore
+    print(user)
+    #> User id=123 name='John Doe' signup_ts=datetime.datetime(2017, 6, 1, 12, 22) friends=[1, 2, 3]
+    print(user.id)
+    #> 123
 
 if __name__ == "__main__":
     main()
