@@ -1,20 +1,24 @@
-from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel
+from questboardparser import GuildQuest, Quest, dispatch_quest, ingest_quests
 
-class User(BaseModel):
-    id: int
-    name: str = 'John Doe'
-    signup_ts: Optional[datetime] = None
-    friends: list[int] = []
+def main() -> None:
+    quests: list[Quest] = [
+        {
+            "quest_id": "Q-001",
+            "target_monster": "Rathalos",
+            "objective_type": "hunt",
+            "zenny_reward": 8600,
+            "environment_hazards": ["volcanic_heat"]
+        },
+        {
+            "quest_id": "Q-002",
+            "target_monster": "Zinogre",
+            "objective_type": "capture",
+            "zenny_reward": 12000
+        }
+    ]
 
-def main():
-    external_data = {'id': '123', 'signup_ts': '2017-06-01 12:22', 'friends': [1, '2', b'3']} # type: ignore
-    user = User(**external_data) # type: ignore
-    print(user)
-    #> User id=123 name='John Doe' signup_ts=datetime.datetime(2017, 6, 1, 12, 22) friends=[1, 2, 3]
-    print(user.id)
-    #> 123
+    cleaned_quests: list[GuildQuest] = ingest_quests(quests)
+    dispatch_quest(cleaned_quests[0])
 
 if __name__ == "__main__":
     main()
