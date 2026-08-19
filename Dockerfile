@@ -14,4 +14,5 @@ WORKDIR /caja
 COPY --from=builder --chown=bot:python /caja/.venv ./.venv
 COPY --chown=bot:python src/main.py .
 USER bot
+VOLUME ["/caja/madriguera"]
 ENTRYPOINT ["python", "main.py"]

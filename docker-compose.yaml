@@ -1,0 +1,24 @@
+name: python-oop
+
+services:
+  python-oop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    pull_policy: build # To build the container every time it composed
+    platform: linux/amd64
+    container_name: oop-python-practice
+    volumes:
+      - type: volume
+        source: caja-oop-vol
+        target: /caja/madriguera
+      - type: bind
+        source: ./data
+        target: /caja/basurero
+    read_only: true # For a read-only file system 
+    networks:
+      - caja-oop-net
+volumes:
+  caja-oop-vol:
+networks:
+  caja-oop-net:

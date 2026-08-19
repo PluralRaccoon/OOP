@@ -70,6 +70,7 @@ pip-delete-this-directory.txt
 **/venv/
 **/venv.bak/
 **/virtualenv/
+__pycache__
 
 .venv/
 
