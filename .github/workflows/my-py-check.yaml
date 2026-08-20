@@ -1,0 +1,41 @@
+name: Mypy Strict Type Check
+
+# 1. When should this action run?
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+# 2. What should it do?
+jobs:
+  type-check:
+    name: Run Mypy
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your repository's code onto the server
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the correct version of Python
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          # Optional: cache pip downloads to make CI run faster next time
+          cache: 'pip' 
+
+      # Step 3: Install mypy and any dependencies your code needs
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mypy
+          # If you have a requirements.txt, uncomment the next line:
+          # pip install -r requirements.txt
+
+      # Step 4: Run the actual Mypy check!
+      - name: Run Mypy
+        run: |
+          # This runs mypy on the whole repo. 
+          # It automatically reads your pyproject.toml for settings.
+          mypy .

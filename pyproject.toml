@@ -21,3 +21,26 @@ types = [
 
 [tool.poetry]
 package-mode = false
+
+[tool.mypy]
+# The python version your project targets
+python_version = "3.11"
+# Force mypy to check all files, even if they don't have type hints yet
+check_untyped_defs = true
+# Warns you if you return a value from a function typed to return None
+warn_return_any = true
+# Warns you if you have # type: ignore comments that are no longer needed
+warn_unused_ignores = true
+# Forces developers to type-hint the arguments and return types of ALL functions
+disallow_untyped_defs = true
+# -------------------------------------------------------------------
+# THE ESCAPE HATCH (Crucial for real-world projects)
+# -------------------------------------------------------------------
+# Many 3rd-party libraries (like pandas or old boto3) don't have type hints.
+# This prevents mypy from crashing when you import them.
+[[tool.mypy.overrides]]
+module = [
+    "some_legacy_library.*",
+    "another_untyped_lib.*"
+]
+ignore_missing_imports = true
