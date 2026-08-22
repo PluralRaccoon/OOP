@@ -160,6 +160,7 @@ env.bak/
 venv.bak/
 __pycache__
 data/
+.vscode/
 
 # Spyder project settings
 .spyderproject
