@@ -33,12 +33,12 @@ class VulnerabilityFinding(BaseModel):
     cvss_score: float
     patched: bool
 
-api_response: dict[str, str] = {
+api_response: dict[str, str | float | bool] = {
     "cve_id": "CVE-2026-9999",
-    "cvss_score": "8.5",  # Note: It's a string!
-    "patched": "False"    # Note: It's a string!
+    "cvss_score": "8.5",  
+    "patched": "False"   
 }
 
-log: VulnerabilityFinding = VulnerabilityFinding(**api_response)
+log = VulnerabilityFinding(**api_response) # type: ignore
 
 print(log)

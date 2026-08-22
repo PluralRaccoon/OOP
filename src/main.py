@@ -27,7 +27,7 @@ class ServerConfig(BaseModel):
 def main() -> None:
     user = User(
         name="Charlie", 
-        age="29", 
+        age="29", # type: ignore 
         pass_induction=True, 
         years_experience="1 week", 
         awards=["AWS Cert", "Terraform Cert"]
@@ -45,7 +45,7 @@ def main() -> None:
 
     # Coercion (Parsing in action)
     raw_data: dict[str, str] = {"hostname": "cache-01", "ram_gb": "32", "is_active": "true"}
-    server2 = ServerConfig(**raw_data)
+    server2 = ServerConfig(**raw_data) # type: ignore
 
     # Pydantic coerced the strings into the correct Python types
     print(repr(server2.ram_gb))

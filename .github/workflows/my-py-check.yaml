@@ -38,4 +38,4 @@ jobs:
 
       # Step 5: Run the actual Mypy check!
       - name: Run type-check with Mypy
-        run: poetry run mypy ./src/main.py ./src/questboardparser.py --strict
+        run: poetry run mypy ./src/main.py ./src/exercises.py --strict
