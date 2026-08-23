@@ -1,44 +1,52 @@
 """
-Exercise 1: Building your first Model
+Handling Unpredictable Scanners
 
 Scenario:
-You are building an ingestion script for a vulnerability scanner. 
-The scanner outputs a flat dictionary for each finding. You need to model this data.
+You are expanding your VulnerabilityFinding model. Sometimes, the cybersecurity scanner detects a vulnerability but hasn't finished calculating the CVSS score yet, so it drops the field entirely. Furthermore, you want every finding to automatically be tagged with a status of "OPEN" unless the API explicitly says otherwise.
 
 Your Task:
-Write a Pydantic BaseModel named VulnerabilityFinding that includes the following fields:
+Rewrite the VulnerabilityFinding model with these two new constraints:
 
-    cve_id: A string representing the vulnerability ID (e.g., "CVE-2026-1234").
+    Make cvss_score optional (it should accept a float, but default to None if the scanner omits it).
 
-    cvss_score: A float representing the severity score.
-
-    patched: A boolean indicating if a patch has been applied.
+    Add a new field called status that must be a string, and defaults to "OPEN".
 
 Test Data:
-Imagine your pipeline receives this messy dictionary from the scanner API:
 Python
 
-api_response = {
-    "cve_id": "CVE-2026-9999",
-    "cvss_score": "8.5",  # Note: It's a string!
-    "patched": "False"    # Note: It's a string!
+api_response_incomplete = {
+    "cve_id": "CVE-2026-0001",
+    "patched": False
+    # Notice cvss_score is completely missing!
+    # Notice status is completely missing!
 }
 
-Task: Show me the class definition, and show me how you would instantiate it using the api_response dictionary.
+Task: Show me the updated model and how you would process this incomplete payload.
 """
 from pydantic import BaseModel
+from typing import Any
 
 class VulnerabilityFinding(BaseModel):
     cve_id: str
-    cvss_score: float
+    cvss_score: float | None = None
     patched: bool
+    status: str = "OPEN"
 
-api_response: dict[str, str | float | bool] = {
+api_response: dict[str, Any] = {
     "cve_id": "CVE-2026-9999",
     "cvss_score": "8.5",  
     "patched": "False"   
 }
 
-log = VulnerabilityFinding(**api_response) # type: ignore
+api_response_incomplete: dict[str, Any] = {
+    "cve_id": "CVE-2026-0001",
+    "patched": False
+    # Notice cvss_score is completely missing!
+    # Notice status is completely missing!
+}
+
+log = VulnerabilityFinding(**api_response) 
+log2 = VulnerabilityFinding(**api_response_incomplete)
 
 print(log)
+print(log2)
